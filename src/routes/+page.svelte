@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts"></script>
+
+{#snippet pageTest(pageName: string)}
+  <li><a class="text-blue-500 hover:underline" href="/{pageName}">{pageName}</a></li>
+{/snippet}
+
+<ul class="list-disc pl-5 space-y-2">
+  {@render pageTest("counter")}
+</ul>

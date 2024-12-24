@@ -1,0 +1,6 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond du logo -->
+  <rect x="10" y="20" width="80" height="60" rx="10" fill="#4A90E2"/>
+  <!-- Bande du portefeuille -->
+  <rect x="15" y="25" width="70" height="20" rx="5" fill="#FFFFFF"/>
+</svg>
