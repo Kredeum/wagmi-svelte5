@@ -3,17 +3,17 @@ import { SvelteMap } from "svelte/reactivity";
 import {
   type ReadContractReturnType,
   deepEqual,
-  getChainId,
   readContract,
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { wagmi, wagmiConfig } from "$lib/wagmi/classes";
-import { isAddress, shorten0xString, type DeploymentsChainId } from "$lib/wagmi/ts";
-import { readDeployment, type DeploymentContractName } from "$lib/wagmi/ts";
+import { wagmi, wagmiConfig } from "@wagmi-svelte5/classes";
+import { isAddress, shorten0xString, type DeploymentsChainId } from "@wagmi-svelte5/ts";
+import { readDeployment, type DeploymentContractName } from "@wagmi-svelte5/ts";
 import { untrack } from "svelte";
-import { notification } from "$lib/wagmi/ts";
+import { notification } from "@wagmi-svelte5/ts";
 import { LinkTx } from "../components";
+import type { Renderable } from "svelte-hot-french-toast";
 
 let counter = 0;
 
@@ -52,13 +52,20 @@ class SmartContract {
     return { chainId, address, abi, dataKey };
   };
 
-  #call = async (chainId: number, address: AddressType, abi: Abi, functionName: string = "", args: unknown[] = []) => {
+  #call = async (
+    chainId: number,
+    address: AddressType,
+    abi: Abi,
+    functionName: string = "",
+    args: unknown[] = []
+  ) => {
     // console.log("SMARTCONTRACT READ", functionName, args, chainId, deployment.address, `#${this.id}`);
     // console.log("SMARTCONTRACT READ",  deployment.abi);
     const abiFunction = (abi as unknown as AbiFunction[]).find(
       (f) => f.type === "function" && f.name === functionName && f.inputs.length === args.length
     );
-    if (!abiFunction) throw new Error(`Function call to ${functionName} with ${args.length} args not found`);
+    if (!abiFunction)
+      throw new Error(`Function call to ${functionName} with ${args.length} args not found`);
 
     let data: ReadContractReturnType;
     try {
@@ -81,7 +88,8 @@ class SmartContract {
   isFetching = $state(false);
   #datas: SvelteMap<string, unknown | undefined> = new SvelteMap();
   callAsync = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
-    const { chainId, address, abi, dataKey } = this.#getParamsOnCurrentChain(functionName, args) || {};
+    const { chainId, address, abi, dataKey } =
+      this.#getParamsOnCurrentChain(functionName, args) || {};
     if (!(chainId && address && abi && dataKey)) return;
 
     this.isFetching = true;
@@ -124,10 +132,14 @@ class SmartContract {
 
       hash = await writeContract(wagmiConfig, { address, abi, functionName, args, value });
 
-      const idHash = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
+      const idHash = notification.info(LinkTx as Renderable, {
+        props: { hash, message: "Transaction sent!" }
+      });
       this.notifs.set(hash, idHash);
     } catch (e: unknown) {
-      notification.error(LinkTx as any, { props: { hash, message: "Transaction call failed!" } });
+      notification.error(LinkTx as Renderable, {
+        props: { hash, message: "Transaction call failed!" }
+      });
       throw new Error(`writeContract error: ${e}`);
     } finally {
       this.sending = false;
@@ -142,10 +154,10 @@ class SmartContract {
   };
   wait = async (hash: `0x${string}`) => {
     this.waiting = true;
-    let receipt = await waitForTransactionReceipt(wagmiConfig, { hash });
+    const receipt = await waitForTransactionReceipt(wagmiConfig, { hash });
 
     notification.remove(this.notifs.get(hash));
-    notification.success(LinkTx as any, {
+    notification.success(LinkTx as Renderable, {
       props: { hash, message: "Transaction validated!" }
     });
 

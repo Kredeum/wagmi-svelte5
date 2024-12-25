@@ -1,7 +1,11 @@
 <script lang="ts">
-  import { Events } from "$lib/wagmi/components";
-  import { readDeploymentContractsName, type DeploymentContractName, type DeploymentsChainId } from "$lib/wagmi/ts";
-  import { wagmi } from "$lib/wagmi/classes";
+  import { Events } from "@wagmi-svelte5/components";
+  import {
+    readDeploymentContractsName,
+    type DeploymentContractName,
+    type DeploymentsChainId
+  } from "@wagmi-svelte5/ts";
+  import { wagmi } from "@wagmi-svelte5/classes";
 
   const localStorageContractKey = "wagmiSvelte5.contractSelected";
 
@@ -10,8 +14,11 @@
   );
 
   const getDefaultContractName = () => {
-    const localStorageContractName = localStorage.getItem(localStorageContractKey) as DeploymentContractName;
-    if (localStorageContractName && contractsName.includes(localStorageContractName)) return localStorageContractName;
+    const localStorageContractName = localStorage.getItem(
+      localStorageContractKey
+    ) as DeploymentContractName;
+    if (localStorageContractName && contractsName.includes(localStorageContractName))
+      return localStorageContractName;
     if (contractsName.length > 0) return contractsName[0];
   };
 
@@ -26,7 +33,8 @@
   <div class="flex w-full max-w-7xl flex-row flex-wrap gap-2 px-6 pb-1 lg:px-10">
     {#each contractsName as contractName}
       <button
-        class="btn btn-secondary btn-sm font-light hover:border-transparent {contractName === contractSelected
+        class="btn btn-secondary btn-sm font-light hover:border-transparent {contractName ===
+        contractSelected
           ? 'no-animation bg-base-300 hover:bg-base-300'
           : 'bg-base-100 hover:bg-secondary'}"
         onclick={() => setDefaultContractName(contractName)}

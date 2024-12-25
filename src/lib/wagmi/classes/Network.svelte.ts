@@ -3,10 +3,9 @@ import {
   getBlockNumber as getBlockNumberWagmi,
   switchChain,
   watchBlockNumber as watchBlockNumberWagmi,
-  disconnect as disconnectWagmi,
-  getChainId
+  disconnect as disconnectWagmi
 } from "@wagmi/core";
-import { Account, wagmi, wagmiConfig } from "$lib/wagmi/classes";
+import { Account, wagmi, wagmiConfig } from "@wagmi-svelte5/classes";
 import * as chains from "viem/chains";
 import type { Chain } from "viem/chains";
 import { untrack } from "svelte";
@@ -17,7 +16,8 @@ let id = 0;
 class Network {
   static findChain = (chainId: number | undefined): Chain | undefined =>
     chainId ? Object.values(chains).find((chain) => chain.id === chainId) : undefined;
-  static getExplorer = (chainId: number) => Network.findChain(chainId)?.blockExplorers?.default.url || "";
+  static getExplorer = (chainId: number) =>
+    Network.findChain(chainId)?.blockExplorers?.default.url || "";
 
   static chainIdLocal = 31337 as const;
 
@@ -30,7 +30,9 @@ class Network {
     return this.#chainId;
   }
   get chain() {
-    return Network.findChain(this.chainId) || Network.findChain(this.chainIdDefault) || chains.mainnet;
+    return (
+      Network.findChain(this.chainId) || Network.findChain(this.chainIdDefault) || chains.mainnet
+    );
   }
   set chain(chain: Chain) {
     this.#chainId = chain.id;
@@ -97,13 +99,27 @@ class Network {
       if (!Network.findChain(account.chainId)) return;
 
       untrack(() => {
-        console.log("Network $effect:", this.#id, this.chainId, "=>", account.chainId, wagmi.chainId);
+        console.log(
+          "Network $effect:",
+          this.#id,
+          this.chainId,
+          "=>",
+          account.chainId,
+          wagmi.chainId
+        );
 
         if (account.chainId == this.chainId) return;
         console.log("Network $effect switch:");
         this.switch(account.chainId);
 
-        console.log("Network $effect:", this.#id, this.chainId, "==", account.chainId, wagmi.chainId);
+        console.log(
+          "Network $effect:",
+          this.#id,
+          this.chainId,
+          "==",
+          account.chainId,
+          wagmi.chainId
+        );
       });
     });
 

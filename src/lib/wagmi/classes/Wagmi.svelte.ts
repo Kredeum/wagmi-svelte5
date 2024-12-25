@@ -3,10 +3,14 @@ import * as chains from "viem/chains";
 import { type Chain, mainnet } from "viem/chains";
 import { createConfig, getChainId, reconnect, watchChainId, type Config } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
-import { createBurnerConnector } from "$lib/wagmi/ts";
-import { Network } from "$lib/wagmi/classes";
-import { ALCHEMY_TRANSPORT, POLLING_INTERVAL, CHAINS, WALLET_CONNECT_PROJECT_ID } from "$lib/wagmi/config";
-
+import { createBurnerConnector } from "@wagmi-svelte5/ts";
+import { Network } from "@wagmi-svelte5/classes";
+import {
+  ALCHEMY_TRANSPORT,
+  POLLING_INTERVAL,
+  CHAINS,
+  WALLET_CONNECT_PROJECT_ID
+} from "@wagmi-svelte5/config";
 
 class Wagmi {
   #connectors = [
@@ -25,10 +29,13 @@ class Wagmi {
 
   #getChains = () => {
     const selectedChains: Chain[] = [];
-    CHAINS.forEach(chainName => (chainName in chains) && selectedChains.push(chains[chainName as keyof typeof chains]));
+    CHAINS.forEach(
+      (chainName) =>
+        chainName in chains && selectedChains.push(chains[chainName as keyof typeof chains])
+    );
     selectedChains.push(mainnet);
     return selectedChains;
-  }
+  };
 
   #chains = this.#getChains() as [Chain, ...Chain[]];
 

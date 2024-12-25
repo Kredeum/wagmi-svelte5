@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Link } from "$lib/wagmi/components";
-  import { shorten0xString } from "$lib/wagmi/ts";
+  import { Link } from "@wagmi-svelte5/components";
+  import { shorten0xString } from "@wagmi-svelte5/ts";
   import { Network, wagmi } from "../classes";
 
   const {

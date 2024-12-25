@@ -17,6 +17,7 @@ const shorten0xString = (addr: `0x${string}`) => addr?.slice(0, 8) + "..." + add
 
 // To be used in JSON.stringify when a field might be bigint
 // https://wagmi.sh/react/faq#bigint-serialization
-const replacer = (_key: string, value: unknown) => (typeof value === "bigint" ? value.toString() : value);
+const replacer = (_key: string, value: unknown) =>
+  typeof value === "bigint" ? value.toString() : value;
 
 export { isEns, isAddress, shorten0xString, replacer };

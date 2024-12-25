@@ -1,15 +1,23 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { type Address } from "viem";
-  import { connect, getConnections, getConnectors, type GetConnectorsReturnType } from "@wagmi/core";
+  import {
+    connect,
+    getConnections,
+    getConnectors,
+    type GetConnectorsReturnType
+  } from "@wagmi/core";
 
-  import { Network, wagmiConfig } from "$lib/wagmi/classes";
-  import { BURNER_WALLET_ONLY_LOCAL } from "$lib/wagmi/config";
-  import { isDeploymentsChainId, type DeploymentsChainId, type Nullable } from "../ts";
+  import { Network, wagmiConfig } from "@wagmi-svelte5/classes";
+  import { BURNER_WALLET_ONLY_LOCAL } from "@wagmi-svelte5/config";
+  import { isDeploymentsChainId, type Nullable } from "../ts";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
-  let { chainId, address = $bindable() }: { chainId?: Nullable<number>; address?: Nullable<Address> } = $props();
+  let {
+    chainId,
+    address = $bindable()
+  }: { chainId?: Nullable<number>; address?: Nullable<Address> } = $props();
 
   const network = new Network();
 
@@ -17,7 +25,7 @@
 
   const connectors: GetConnectorsReturnType = $derived(getConnectors(wagmiConfig));
   const findConnector = (type: string) => {
-    const connector = connectors.find((c) => c.type === type);
+    const connector = connectors.find((cnx) => cnx.type === type);
 
     const typeInjected = type === "injected";
     network.chainId;
@@ -58,18 +66,24 @@
     const parameters: { connector: ConnectorType; chainId?: number } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
-      parameters.chainId = BURNER_WALLET_ONLY_LOCAL ? Network.chainIdLocal : network.chainId || network.chainIdDefault;
+      parameters.chainId = BURNER_WALLET_ONLY_LOCAL
+        ? Network.chainIdLocal
+        : network.chainId || network.chainIdDefault;
     }
     const wallet = await connect(wagmiConfig, parameters);
 
     address = wallet.accounts[0];
 
-    if (!isDeploymentsChainId(wallet.chainId)) {
-      console.log("<Connect connectWallet ~ switch to default Chain:", network.chainIdDefault);
-      network.switch(network.chainIdDefault);
-      chainId = network.chainIdDefault;
-    } else {
-      chainId = wallet.chainId;
+    chainId = isDeploymentsChainId(chainId)
+      ? chainId
+      : isDeploymentsChainId(wallet.chainId)
+        ? wallet.chainId
+        : network.chainIdDefault;
+
+    if (chainId && chainId !== wallet.chainId) {
+      console.log("<Connect connectWallet ~ switch from", wallet.chainId, "to", chainId);
+
+      network.switch(chainId);
     }
   };
 
@@ -83,8 +97,8 @@
 </button>
 
 {#if modalDisplay}
-  <div class="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-start">
-    <div class="flex flex-col items-center bg-secondary px-8 pt-4 pb-8 rounded-3xl relative mt-20">
+  <div class="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-60">
+    <div class="relative mt-20 flex flex-col items-center rounded-3xl bg-secondary px-8 pb-8 pt-4">
       <h3 class="mb-6 text-xl font-bold">Connect Wallet</h3>
       <button
         class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3 text-xl"
@@ -110,11 +124,11 @@
 {#snippet connectSnippet(type: string)}
   {@const { connector, slug, name } = findConnector(type)}
   {#if connector}
-    <li class="flex align-center">
-      <img src="/{slug}.svg" alt={name} class="w-8 h-8 mr-2" />
+    <li class="align-center flex">
+      <img src="/{slug}.svg" alt={name} class="mr-2 h-8 w-8" />
       <button
         id="connect-{slug.toLowerCase()}"
-        class="btn btn-default btn-sm w-40"
+        class="btn-default btn btn-sm w-40"
         onclick={() => connectWallet(connector)}
       >
         {name}

@@ -1,5 +1,5 @@
 import { getPublicClient, watchPublicClient } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/classes";
+import { wagmiConfig } from "@wagmi-svelte5/classes";
 
 type PublicClientType = typeof Client.prototype.publicClient;
 

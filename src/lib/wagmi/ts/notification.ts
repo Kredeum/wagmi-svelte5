@@ -1,4 +1,4 @@
-import { BaseNotification } from "$lib/wagmi/components";
+import { BaseNotification } from "@wagmi-svelte5/components";
 import toast, { type Renderable, type ToastPosition } from "svelte-hot-french-toast";
 
 type NotificationProps = {
@@ -7,14 +7,14 @@ type NotificationProps = {
   duration?: number;
   icon?: string;
   position?: ToastPosition;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
 };
 
 type NotificationOptions = {
   duration?: number;
   icon?: string;
   position?: ToastPosition;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
 };
 
 const DEFAULT_DURATION = 3000;
@@ -28,7 +28,7 @@ const Notification = ({
   position = DEFAULT_POSITION,
   props
 }: NotificationProps) => {
-  return toast.custom(BaseNotification as any, {
+  return toast.custom(BaseNotification, {
     duration: status === "loading" ? Infinity : duration,
     position,
     props: { ...props, Content, status },

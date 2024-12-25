@@ -1,7 +1,7 @@
 import { dev } from "$app/environment";
 import type { Hex } from "viem";
 import { generatePrivateKey } from "viem/accounts";
-import { BURNER_WALLET_KEY } from "$lib/wagmi/config";
+import { BURNER_WALLET_KEY } from "@wagmi-svelte5/config";
 
 const burnerLocalStorageKey = "wagmiSvelte5.burnerWallet.sk";
 let currentSk: Hex = "0x";
@@ -34,7 +34,9 @@ export const loadBurnerSK = (): Hex => {
   if (isValidSk(currentSk)) return currentSk;
 
   // search for Key in local storage
-  const localStorageKey = (window?.localStorage?.getItem?.(burnerLocalStorageKey)?.replaceAll('"', "") ?? "0x") as Hex;
+  const localStorageKey = (window?.localStorage
+    ?.getItem?.(burnerLocalStorageKey)
+    ?.replaceAll('"', "") ?? "0x") as Hex;
 
   // search for Key in environnement (dev mode only)
   const envStorageKey = ((dev && BURNER_WALLET_KEY) || "0x") as Hex;
