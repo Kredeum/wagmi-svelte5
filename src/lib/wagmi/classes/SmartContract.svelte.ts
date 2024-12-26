@@ -7,12 +7,12 @@ import {
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { wagmi, wagmiConfig } from "@wagmi-svelte5/classes";
-import { isAddress, shorten0xString, type DeploymentsChainId } from "@wagmi-svelte5/ts";
-import { readDeployment, type DeploymentContractName } from "@wagmi-svelte5/ts";
+import { wagmi, wagmiConfig } from "@wagmi-svelte5";
+import { isAddress, shorten0xString, type DeploymentsChainId } from "@wagmi-svelte5";
+import { readDeployment, type DeploymentContractName } from "@wagmi-svelte5";
 import { untrack } from "svelte";
-import { notification } from "@wagmi-svelte5/ts";
-import { LinkTx } from "../components";
+import { notification } from "@wagmi-svelte5";
+import { LinkTx } from "@wagmi-svelte5";
 import type { Renderable } from "svelte-hot-french-toast";
 
 let counter = 0;

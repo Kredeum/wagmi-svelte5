@@ -1,4 +1,4 @@
-import { BaseNotification } from "@wagmi-svelte5/components";
+import { BaseNotification } from "@wagmi-svelte5";
 import toast, { type Renderable, type ToastPosition } from "svelte-hot-french-toast";
 
 type NotificationProps = {

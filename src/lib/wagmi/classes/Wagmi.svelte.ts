@@ -1,65 +1,76 @@
 import { createClient } from "viem";
-import * as chains from "viem/chains";
+import * as allChains from "viem/chains";
 import { type Chain, mainnet } from "viem/chains";
-import { createConfig, getChainId, reconnect, watchChainId, type Config } from "@wagmi/core";
-import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
-import { createBurnerConnector } from "@wagmi-svelte5/ts";
-import { Network } from "@wagmi-svelte5/classes";
 import {
-  ALCHEMY_TRANSPORT,
+  createConfig,
+  getChainId,
+  reconnect,
+  watchChainId,
+  type CreateConnectorFn
+} from "@wagmi/core";
+import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
+import { Network, createBurnerConnector, alchemyTransport } from "@wagmi-svelte5";
+import {
+  ALCHEMY_API_KEY,
   POLLING_INTERVAL,
   CHAINS,
   WALLET_CONNECT_PROJECT_ID
-} from "@wagmi-svelte5/config";
+} from "@wagmi-svelte5";
 
-class Wagmi {
-  #connectors = [
-    injected(),
-    metaMask(),
-    walletConnect({
-      projectId: WALLET_CONNECT_PROJECT_ID,
-      showQrModal: true
-    }),
-    coinbaseWallet({
-      appName: "Wagmi-Svelte-5",
-      preference: "all"
-    }),
-    createBurnerConnector()
-  ];
-
-  #getChains = () => {
-    const selectedChains: Chain[] = [];
-    CHAINS.forEach(
-      (chainName) =>
-        chainName in chains && selectedChains.push(chains[chainName as keyof typeof chains])
-    );
-    selectedChains.push(mainnet);
-    return selectedChains;
-  };
-
-  #chains = this.#getChains() as [Chain, ...Chain[]];
-
-  config = $state(
-    createConfig({
-      chains: this.#chains,
-      connectors: this.#connectors,
-      syncConnectedChain: true,
-      client({ chain }) {
-        const client = createClient({ chain, transport: ALCHEMY_TRANSPORT(chain.id, "wss") });
-        // console.log("WAGMI client created:", chain.id, client);
-
-        if (chain.id === Network.chainIdLocal) client.pollingInterval = POLLING_INTERVAL;
-        return client;
-      }
-    })
+const getChains = () => {
+  const selectedChains: Chain[] = [];
+  CHAINS.forEach(
+    (chainName) =>
+      chainName in allChains && selectedChains.push(allChains[chainName as keyof typeof allChains])
   );
+  selectedChains.push(mainnet);
+  console.log("selectedChains:", selectedChains);
+  return selectedChains;
+};
 
-  #chainId = $state<number>(getChainId(this.config));
+const chains = getChains() as [Chain, ...Chain[]];
+
+const connectors = [
+  injected(),
+  metaMask(),
+  walletConnect({
+    projectId: WALLET_CONNECT_PROJECT_ID,
+    showQrModal: true
+  }),
+  coinbaseWallet({
+    appName: "Wagmi-Svelte-5",
+    preference: "all"
+  }),
+  createBurnerConnector()
+];
+
+const wagmiConfig = createConfig({
+  chains,
+  connectors: connectors as CreateConnectorFn[],
+  syncConnectedChain: true,
+  client({ chain }) {
+    const client = createClient({
+      chain,
+      transport: alchemyTransport(chain.id, ALCHEMY_API_KEY, "wss")
+    });
+    // console.log("WAGMI client created:", chain.id, client);
+
+    if (chain.id === Network.chainIdLocal) client.pollingInterval = POLLING_INTERVAL;
+    return client;
+  }
+});
+
+class Wagmi extends Network {
+  get chains() {
+    return chains.slice(0, -1);
+  }
+
+  #chainId = $state<number>(getChainId(wagmiConfig));
   get chainId() {
     return this.#chainId;
   }
   watch = () =>
-    watchChainId(this.config, {
+    watchChainId(wagmiConfig, {
       onChange: (chainId: number) => {
         console.log("watchChainId Change:", chainId);
         this.#chainId = chainId;
@@ -69,11 +80,12 @@ class Wagmi {
   recentConnectorId = $state();
 
   reconnect = async () => {
-    this.recentConnectorId = await this.config.storage?.getItem("recentConnectorId");
-    if (this.recentConnectorId) reconnect(this.config);
+    this.recentConnectorId = await wagmiConfig.storage?.getItem("recentConnectorId");
+    if (this.recentConnectorId) reconnect(wagmiConfig);
   };
 
   constructor() {
+    super(getChainId(wagmiConfig));
     this.reconnect();
     this.watch();
 
@@ -82,10 +94,8 @@ class Wagmi {
 }
 
 let wagmi: Wagmi;
-let wagmiConfig: Config;
 const newWagmi = () => {
   wagmi ||= new Wagmi();
-  wagmiConfig = wagmi.config;
 };
 
 export { Wagmi, newWagmi, wagmi, wagmiConfig };

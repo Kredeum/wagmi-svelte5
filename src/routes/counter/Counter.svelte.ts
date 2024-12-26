@@ -1,6 +1,6 @@
-import { SmartContract } from "@wagmi-svelte5/classes";
+import { SmartContract } from "@wagmi-svelte5";
 import type { Address } from "viem";
-import { isAddress } from "@wagmi-svelte5/ts";
+import { isAddress } from "@wagmi-svelte5";
 
 class Counter extends SmartContract {
   get number() {

@@ -1,16 +1,14 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { Connect } from "@wagmi-svelte5/components";
-  import { Account, newWagmi } from "@wagmi-svelte5/classes";
+  import { Account, Connect, wagmi, newWagmi } from "@wagmi-svelte5";
   import "../app.pcss";
-  import { anvil } from "viem/chains";
 
   let { children }: { children: Snippet } = $props();
 
-  const chains = [anvil];
-
   newWagmi();
 
+  const chains = wagmi.chains;
+  console.log("chains:", chains);
   const account = new Account();
 
   const disconnect = () => {
@@ -18,6 +16,7 @@
   };
   const switchChain = (chainId: number) => {
     console.log("switch", chainId);
+    wagmi.switch(chainId);
   };
 </script>
 
@@ -34,11 +33,13 @@
         <button class="btn btn-primary btn-sm" onclick={() => disconnect()}>Disconnect</button>
 
         {#each chains as chain (chain.id)}
-          <span class="px-1">
-            <button class="btn-default btn btn-sm" onclick={() => switchChain(chain.id)}>
-              {chain.name}
-            </button>
-          </span>
+          {#if chain.id !== account.chainId}
+            <span class="px-1">
+              <button class="btn-default btn btn-sm" onclick={() => switchChain(chain.id)}>
+                {chain.name}
+              </button>
+            </span>
+          {/if}
         {/each}
         <div class="p-2"></div>
       {:else}

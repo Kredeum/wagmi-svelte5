@@ -89,5 +89,744 @@
         }
       ]
     }
+  },
+  "84532": {
+    "Counter": {
+      "address": "0xb1eC295A306436560C7A27616f51B5d76D6aDCa8",
+      "abi": [
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "account",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "increment",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "number",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "setNumber",
+          "inputs": [
+            {
+              "name": "newNumber",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "square",
+          "inputs": [
+            {
+              "name": "num",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "pure"
+        },
+        {
+          "type": "event",
+          "name": "NumberChanged",
+          "inputs": [
+            {
+              "name": "newNumber",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        }
+      ]
+    },
+    "Faucet": {
+      "address": "0xafdB96b80590042c2B557D38Ea4a4b9EceAf262b",
+      "abi": [
+        {
+          "type": "constructor",
+          "inputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "receive",
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "allowedRequester",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "requestSomeEther",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setAllowedRequester",
+          "inputs": [
+            {
+              "name": "requester",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setAmount",
+          "inputs": [
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "someAmount",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "error",
+          "name": "FailedToSendEther",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "someAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "result",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "FailedToWithdrawEther",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "result",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotAllowedRequester",
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotEnoughBalance",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "someAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotForZeroAddress",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NotOwner",
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
+        }
+      ]
+    },
+    "OnChainAIv1": {
+      "address": "0xc308300b222bf2C6B0C81D8C1a64909D0a32b5Ec",
+      "abi": [
+        {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "router",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "acceptOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "handleOracleFulfillment",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "err",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "sendRequest",
+          "inputs": [
+            {
+              "name": "userPrompt",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "setDonHostedSecretsVersion",
+          "inputs": [
+            {
+              "name": "donHostedSecretsVersion_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setDonID",
+          "inputs": [
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setGasLimit",
+          "inputs": [
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setJavascript",
+          "inputs": [
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setSubscriptionId",
+          "inputs": [
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "InteractionLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "JavascriptLog",
+          "inputs": [
+            {
+              "name": "javascript",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferRequested",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestFulfilled",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestSent",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "EmptyArgs",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "EmptySource",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "OnlyRouterCanFulfill",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "PaymentRequired",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

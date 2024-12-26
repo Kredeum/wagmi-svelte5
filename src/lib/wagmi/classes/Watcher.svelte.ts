@@ -1,4 +1,4 @@
-import { POLLING_INTERVAL } from "@wagmi-svelte5/config";
+import { POLLING_INTERVAL } from "@wagmi-svelte5";
 
 class Watcher {
   id = $state(0);

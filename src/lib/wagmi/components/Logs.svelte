@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { replacer } from "@wagmi-svelte5/ts";
-  import { Events } from "@wagmi-svelte5/classes";
-  import type { DeploymentContractName } from "@wagmi-svelte5/ts";
+  import { replacer } from "@wagmi-svelte5";
+  import { Events } from "@wagmi-svelte5";
+  import type { DeploymentContractName } from "@wagmi-svelte5";
 
   const { contractName }: { contractName: DeploymentContractName } = $props();
 

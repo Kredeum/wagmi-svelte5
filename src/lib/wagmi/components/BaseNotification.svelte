@@ -8,7 +8,7 @@
     XMark
   } from "svelte-hero-icons";
   import toast_, { type Renderable, type Toast } from "svelte-hot-french-toast";
-  import { clickOutside } from "@wagmi-svelte5/ts";
+  import { clickOutside } from "@wagmi-svelte5";
 
   const {
     ...allProps

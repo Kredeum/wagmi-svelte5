@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Counter } from "$lib/test/Counter.svelte";
+  import { Counter } from "./Counter.svelte";
 
   const contract = new Counter();
 </script>

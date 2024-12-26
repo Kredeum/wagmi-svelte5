@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { Events } from "@wagmi-svelte5/components";
+  import { Logs } from "@wagmi-svelte5";
   import {
     readDeploymentContractsName,
     type DeploymentContractName,
     type DeploymentsChainId
-  } from "@wagmi-svelte5/ts";
-  import { wagmi } from "@wagmi-svelte5/classes";
+  } from "@wagmi-svelte5";
+  import { wagmi } from "@wagmi-svelte5";
 
   const localStorageContractKey = "wagmiSvelte5.contractSelected";
 
@@ -46,6 +46,6 @@
     {/each}
   </div>
   {#if contractSelected}
-    <Events contractName={contractSelected} />
+    <Logs contractName={contractSelected} />
   {/if}
 </div>

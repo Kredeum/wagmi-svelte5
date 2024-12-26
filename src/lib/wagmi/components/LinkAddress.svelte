@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Link } from "@wagmi-svelte5/components";
-  import { Network, wagmi } from "../classes";
+  import { Link } from "@wagmi-svelte5";
+  import { Network, wagmi } from "@wagmi-svelte5";
 
   const { address, description = "address" }: { address?: `0x${string}`; description?: string } =
     $props();

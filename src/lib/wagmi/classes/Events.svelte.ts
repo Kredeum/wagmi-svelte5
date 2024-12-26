@@ -1,9 +1,9 @@
 import { type Address as AddressType, type ContractEventName, type Log } from "viem";
 
-import { type DeploymentContractName } from "@wagmi-svelte5/ts";
+import { type DeploymentContractName } from "@wagmi-svelte5";
 
-import { SmartContract, wagmi, wagmiConfig } from "@wagmi-svelte5/classes";
-import { getContractEvents, type LogWithArgs } from "@wagmi-svelte5/ts";
+import { SmartContract, wagmi, wagmiConfig } from "@wagmi-svelte5";
+import { getContractEvents, type LogWithArgs } from "@wagmi-svelte5";
 import { watchContractEvent, getBlockNumber } from "@wagmi/core";
 
 type EventsFilter = { eventName?: ContractEventName; args?: Record<string, unknown> };

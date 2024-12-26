@@ -1,9 +1,9 @@
 import { type Address as AddressType, checksumAddress } from "viem";
 import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } from "@wagmi/core";
 
-import { isAddress, isEns } from "@wagmi-svelte5/ts";
-import type { Nullable } from "@wagmi-svelte5/ts";
-import { wagmi, wagmiConfig, Watcher } from "@wagmi-svelte5/classes";
+import { isAddress, isEns } from "@wagmi-svelte5";
+import type { Nullable } from "@wagmi-svelte5";
+import { wagmi, wagmiConfig, Watcher } from "@wagmi-svelte5";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { mainnet } from "viem/chains";
 import { untrack } from "svelte";

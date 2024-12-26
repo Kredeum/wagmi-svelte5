@@ -1,6 +1,6 @@
 import jsonDeployments from "$lib/deployments.json";
 import { type Abi, type Address } from "viem";
-import { isAddress, type Nullable } from "@wagmi-svelte5/ts";
+import { isAddress, type Nullable } from "@wagmi-svelte5";
 
 type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
 

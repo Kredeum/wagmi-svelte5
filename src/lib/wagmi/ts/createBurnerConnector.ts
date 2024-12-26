@@ -17,7 +17,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { anvil } from "viem/chains";
 import { getHttpRpcClient, hexToBigInt, numberToHex } from "viem/utils";
 import type { SendTransactionParameters } from "viem/zksync";
-import { BURNER_WALLET_ONLY_LOCAL } from "@wagmi-svelte5/config";
+import { BURNER_WALLET_ONLY_LOCAL } from "@wagmi-svelte5";
 
 export class ConnectorNotConnectedError extends BaseError {
   override name = "ConnectorNotConnectedError";

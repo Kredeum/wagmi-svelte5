@@ -5,12 +5,10 @@ import {
   watchBlockNumber as watchBlockNumberWagmi,
   disconnect as disconnectWagmi
 } from "@wagmi/core";
-import { Account, wagmi, wagmiConfig } from "@wagmi-svelte5/classes";
+import { Account, wagmi, wagmiConfig } from "@wagmi-svelte5";
 import * as chains from "viem/chains";
 import type { Chain } from "viem/chains";
 import { untrack } from "svelte";
-
-let id = 0;
 
 // Network Class, reactive on chainId
 class Network {
@@ -20,8 +18,6 @@ class Network {
     Network.findChain(chainId)?.blockExplorers?.default.url || "";
 
   static chainIdLocal = 31337 as const;
-
-  #id = ++id;
 
   #chainId: number = $state(31337);
   chainIdDefault: number = Network.chainIdLocal;
@@ -99,27 +95,9 @@ class Network {
       if (!Network.findChain(account.chainId)) return;
 
       untrack(() => {
-        console.log(
-          "Network $effect:",
-          this.#id,
-          this.chainId,
-          "=>",
-          account.chainId,
-          wagmi.chainId
-        );
-
         if (account.chainId == this.chainId) return;
         console.log("Network $effect switch:");
         this.switch(account.chainId);
-
-        console.log(
-          "Network $effect:",
-          this.#id,
-          this.chainId,
-          "==",
-          account.chainId,
-          wagmi.chainId
-        );
       });
     });
 
