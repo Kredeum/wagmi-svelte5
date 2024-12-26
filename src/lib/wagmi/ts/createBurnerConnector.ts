@@ -17,7 +17,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { anvil } from "viem/chains";
 import { getHttpRpcClient, hexToBigInt, numberToHex } from "viem/utils";
 import type { SendTransactionParameters } from "viem/zksync";
-import { BURNER_WALLET_ONLY_LOCAL } from "$lib/wagmi/config";
+import { BURNER_WALLET_ONLY_LOCAL } from "@wagmi-svelte5";
 
 export class ConnectorNotConnectedError extends BaseError {
   override name = "ConnectorNotConnectedError";
@@ -40,7 +40,9 @@ const localStoreGetChainId = (): number => {
   return Number(window?.localStorage?.getItem("wagmiSvelte5.burnerWallet.chainId"));
 };
 
-type Provider = ReturnType<Transport<"custom", Record<any, any>, EIP1193RequestFn<WalletRpcSchema>>>;
+type Provider = ReturnType<
+  Transport<"custom", Record<string | number | symbol, unknown>, EIP1193RequestFn<WalletRpcSchema>>
+>;
 
 export const createBurnerConnector = () => {
   let connected = true;
@@ -87,7 +89,9 @@ export const createBurnerConnector = () => {
       const request: EIP1193RequestFn = async ({ method, params }) => {
         if (method === "eth_sendTransaction") {
           const actualParams = (params as SendTransactionParameters[])[0];
-          const value = actualParams.value ? hexToBigInt(actualParams.value as unknown as Hex) : undefined;
+          const value = actualParams.value
+            ? hexToBigInt(actualParams.value as unknown as Hex)
+            : undefined;
           const hash = await client.sendTransaction({
             ...(params as SendTransactionParameters[])[0],
             value

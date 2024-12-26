@@ -1,9 +1,9 @@
 import { type Address as AddressType, checksumAddress } from "viem";
-import { deepEqual, getBalance as getBalanceWagmi, getChainId, type GetBalanceReturnType } from "@wagmi/core";
+import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } from "@wagmi/core";
 
-import { isAddress, isEns } from "$lib/wagmi/ts";
-import type { Nullable } from "$lib/wagmi/ts";
-import { wagmi, wagmiConfig, Watcher } from "$lib/wagmi/classes";
+import { isAddress, isEns } from "@wagmi-svelte5";
+import type { Nullable } from "@wagmi-svelte5";
+import { wagmi, wagmiConfig, Watcher } from "@wagmi-svelte5";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { mainnet } from "viem/chains";
 import { untrack } from "svelte";
@@ -58,7 +58,10 @@ class Address {
   #setEnsNamePlus = async (ensName: string) => {
     this.#ensName = ensName;
     if (this.#ens) {
-      this.#ensAvatar = (await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName })) as string;
+      this.#ensAvatar = (await getEnsAvatar(wagmiConfig, {
+        chainId: mainnet.id,
+        name: ensName
+      })) as string;
       this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
     }
   };
@@ -106,7 +109,10 @@ class Address {
     return this.#balance?.symbol;
   }
 
-  constructor(addressOrName: Nullable<AddressType | string>, { watchBalance = false, ens = false } = {}) {
+  constructor(
+    addressOrName: Nullable<AddressType | string>,
+    { watchBalance = false, ens = false } = {}
+  ) {
     // console.log("<Address constructor", addressOrName);
 
     this.#watchBalance = watchBalance;
@@ -118,9 +124,7 @@ class Address {
     $effect(() => {
       if (!this.address) return;
       wagmi.chainId;
-      // getChainId(wagmiConfig);
 
-      this.address;
       untrack(() => this.#getAndWatchBalance());
     });
 

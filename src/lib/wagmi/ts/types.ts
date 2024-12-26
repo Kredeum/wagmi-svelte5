@@ -6,7 +6,7 @@ export type LogWithArgs = Log & { args: []; index: number };
 
 export type LogsParamsType = {
   address: Address;
-  abi: any;
+  abi: unknown;
   eventName?: string;
   args?: unknown[];
 };

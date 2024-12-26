@@ -1,7 +1,6 @@
-import { type Address as AddressType } from "viem";
 import { getAccount, watchAccount } from "@wagmi/core";
-import { Address, wagmiConfig } from "$lib/wagmi/classes";
-import type { Nullable } from "../ts";
+import { Address, wagmiConfig } from "@wagmi-svelte5";
+import type { Nullable } from "@wagmi-svelte5";
 
 type AccountType = ReturnType<typeof getAccount>;
 

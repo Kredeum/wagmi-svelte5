@@ -8,7 +8,7 @@
     XMark
   } from "svelte-hero-icons";
   import toast_, { type Renderable, type Toast } from "svelte-hot-french-toast";
-  import { clickOutside } from "$lib/wagmi/ts";
+  import { clickOutside } from "@wagmi-svelte5";
 
   const {
     ...allProps
@@ -58,6 +58,10 @@
   </div>
 
   <button class="cursor-pointer text-lg" class:mt-1={icon}>
-    <Icon src={XMark} class="w-6 cursor-pointer notification-close" onclick={() => toast_.remove(id)} />
+    <Icon
+      src={XMark}
+      class="notification-close w-6 cursor-pointer"
+      onclick={() => toast_.remove(id)}
+    />
   </button>
 </div>
