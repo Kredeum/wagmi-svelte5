@@ -1,6 +1,6 @@
 import { getAccount, watchAccount } from "@wagmi/core";
-import { Address, wagmiConfig } from "@wagmi-svelte5";
-import type { Nullable } from "@wagmi-svelte5";
+import { Address, wagmiConfig } from "..";
+import type { Nullable } from "..";
 
 type AccountType = ReturnType<typeof getAccount>;
 

@@ -1,6 +1,5 @@
-import { SmartContract } from "@wagmi-svelte5";
 import type { Address } from "viem";
-import { isAddress } from "@wagmi-svelte5";
+import { SmartContract, isAddress } from "@wagmi-svelte5";
 
 class Counter extends SmartContract {
   get number() {
@@ -10,11 +9,11 @@ class Counter extends SmartContract {
     await this.sendAndWait("increment");
     await this.callAsync("number");
   };
-  setNumber = async (num: number) => {
+  setNumber = async (num: number | bigint = 1n) => {
     await this.sendAndWait("setNumber", [num]);
     await this.callAsync("number");
   };
-  square(num: number) {
+  square(num: number | bigint = 1n) {
     return this.call("square", [num]) as bigint;
   }
   balanceOf(address: Address) {

@@ -1,10 +1,7 @@
 import { type Address as AddressType, type ContractEventName, type Log } from "viem";
-
-import { type DeploymentContractName } from "@wagmi-svelte5";
-
-import { SmartContract, wagmi, wagmiConfig } from "@wagmi-svelte5";
-import { getContractEvents, type LogWithArgs } from "@wagmi-svelte5";
 import { watchContractEvent, getBlockNumber } from "@wagmi/core";
+
+import { type LogWithArgs, SmartContract, wagmi, wagmiConfig, getContractEvents } from "..";
 
 type EventsFilter = { eventName?: ContractEventName; args?: Record<string, unknown> };
 type EventsSortOrder = "DESC" | "ASC" | undefined;
@@ -85,7 +82,7 @@ class Events extends SmartContract {
   };
 
   constructor(
-    nameOrAddress: DeploymentContractName | AddressType,
+    nameOrAddress: string | AddressType,
     {
       filter = {},
       limit = 3,

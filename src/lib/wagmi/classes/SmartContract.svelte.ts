@@ -1,28 +1,26 @@
-import { type Abi, type AbiFunction, type Address as AddressType } from "viem";
+import { untrack } from "svelte";
 import { SvelteMap } from "svelte/reactivity";
+import type { Renderable } from "svelte-hot-french-toast";
+import { type Abi, type AbiFunction, type Address as AddressType } from "viem";
 import {
   type ReadContractReturnType,
   deepEqual,
   readContract,
+  serialize,
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { wagmi, wagmiConfig } from "@wagmi-svelte5";
-import { isAddress, shorten0xString, type DeploymentsChainId } from "@wagmi-svelte5";
-import { readDeployment, type DeploymentContractName } from "@wagmi-svelte5";
-import { untrack } from "svelte";
-import { notification } from "@wagmi-svelte5";
-import { LinkTx } from "@wagmi-svelte5";
-import type { Renderable } from "svelte-hot-french-toast";
+
+import { wagmi, wagmiConfig, isAddress, shorten0xString, readDeployment, notification, LinkTx } from "..";
 
 let counter = 0;
 
 class SmartContract {
   id = 0;
-  chainId = $derived(wagmi.chainId as DeploymentsChainId);
+  chainId = $derived(wagmi.chainId);
 
   name: string | undefined;
-  #nameOrAddress: DeploymentContractName | AddressType | undefined;
+  #nameOrAddress: string | AddressType | undefined;
 
   get address(): AddressType | undefined {
     const { address } = readDeployment(this.chainId, this.#nameOrAddress!) ?? {};
@@ -34,7 +32,7 @@ class SmartContract {
     return abi;
   }
 
-  #setNameOrAddress(nameOrAddress: DeploymentContractName | AddressType) {
+  #setNameOrAddress(nameOrAddress: string | AddressType) {
     this.#nameOrAddress = nameOrAddress;
     this.name = isAddress(nameOrAddress)
       ? "Contract @" + shorten0xString(this.#nameOrAddress as `0x$string`)
@@ -47,7 +45,7 @@ class SmartContract {
     const { address, abi } = readDeployment(chainId, this.#nameOrAddress!) ?? {};
     if (!(address && abi)) return;
 
-    const dataKey = JSON.stringify({ chainId, address, functionName, args });
+    const dataKey = serialize({ chainId, address, functionName, args });
 
     return { chainId, address, abi, dataKey };
   };
@@ -170,7 +168,7 @@ class SmartContract {
     return hash;
   };
 
-  constructor(nameOrAddress: DeploymentContractName | AddressType) {
+  constructor(nameOrAddress: string | AddressType) {
     if (!nameOrAddress) throw new Error("SmartContract nameOrAddress required");
 
     this.id = ++counter;

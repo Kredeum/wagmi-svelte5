@@ -1,17 +1,17 @@
 {
-  "name": "wagmi-svelte5",
-  "version": "0.1.1",
+  "name": "@wagmi-svelte5",
+  "version": "0.1.2",
   "license": "MIT",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "svelte": "./dist/index.js"
+      "types": "./dist/wagmi/index.d.ts",
+      "svelte": "./dist/wagmi/index.js"
     }
   },
-  "svelte": "./dist/index.js",
+  "svelte": "./dist/wagmi/index.js",
   "sideEffects": [
     "**/*.css"
   ],

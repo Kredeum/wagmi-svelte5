@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { Link } from "@wagmi-svelte5";
-  import { shorten0xString } from "@wagmi-svelte5";
-  import { Network, wagmi } from "@wagmi-svelte5";
+  import { Link ,  Network,shorten0xString , wagmi } from "..";
 
   const {
     hash,

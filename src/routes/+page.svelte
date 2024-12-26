@@ -6,4 +6,5 @@
 
 <ul class="list-disc space-y-2 pl-5">
   {@render pageTest("counter")}
+  {@render pageTest("deployments")}
 </ul>

@@ -1,3 +1,6 @@
+import { untrack } from "svelte";
+import * as chains from "viem/chains";
+import type { Chain } from "viem/chains";
 import {
   type WatchBlockNumberReturnType,
   getBlockNumber as getBlockNumberWagmi,
@@ -5,10 +8,8 @@ import {
   watchBlockNumber as watchBlockNumberWagmi,
   disconnect as disconnectWagmi
 } from "@wagmi/core";
-import { Account, wagmi, wagmiConfig } from "@wagmi-svelte5";
-import * as chains from "viem/chains";
-import type { Chain } from "viem/chains";
-import { untrack } from "svelte";
+
+import { Account, wagmi, wagmiConfig } from "..";
 
 // Network Class, reactive on chainId
 class Network {

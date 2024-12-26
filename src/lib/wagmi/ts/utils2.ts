@@ -1,7 +1,8 @@
 import { DEV } from "esm-env";
 import type { Hex } from "viem";
 import { generatePrivateKey } from "viem/accounts";
-import { BURNER_WALLET_KEY } from "@wagmi-svelte5";
+
+import { BURNER_WALLET_KEY } from "..";
 
 const burnerLocalStorageKey = "wagmiSvelte5.burnerWallet.sk";
 let currentSk: Hex = "0x";

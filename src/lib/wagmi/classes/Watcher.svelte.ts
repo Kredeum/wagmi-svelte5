@@ -1,4 +1,4 @@
-import { POLLING_INTERVAL } from "@wagmi-svelte5";
+import { POLLING_INTERVAL } from "..";
 
 class Watcher {
   id = $state(0);

@@ -1,29 +1,19 @@
 <script lang="ts">
-  import { Logs } from "@wagmi-svelte5";
-  import {
-    readDeploymentContractsName,
-    type DeploymentContractName,
-    type DeploymentsChainId
-  } from "@wagmi-svelte5";
-  import { wagmi } from "@wagmi-svelte5";
+  import { Logs ,readDeploymentContractsName ,wagmi } from "..";
 
   const localStorageContractKey = "wagmiSvelte5.contractSelected";
 
-  const contractsName: DeploymentContractName[] = $derived(
-    readDeploymentContractsName(wagmi.chainId as DeploymentsChainId)
-  );
+  const contractsName: string[] = $derived(readDeploymentContractsName(wagmi.chainId));
 
   const getDefaultContractName = () => {
-    const localStorageContractName = localStorage.getItem(
-      localStorageContractKey
-    ) as DeploymentContractName;
+    const localStorageContractName = localStorage.getItem(localStorageContractKey) as string;
     if (localStorageContractName && contractsName.includes(localStorageContractName))
       return localStorageContractName;
     if (contractsName.length > 0) return contractsName[0];
   };
 
   let contractSelected = $state(getDefaultContractName());
-  const setDefaultContractName = (contractName: DeploymentContractName) => {
+  const setDefaultContractName = (contractName: string) => {
     contractSelected = contractName;
     localStorage.setItem(localStorageContractKey, String(contractName));
   };

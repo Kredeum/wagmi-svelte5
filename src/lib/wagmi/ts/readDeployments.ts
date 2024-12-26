@@ -1,82 +1,78 @@
-import jsonDeployments from "$lib/deployments.json";
 import { type Abi, type Address } from "viem";
 import { isAddress, type Nullable } from "@wagmi-svelte5";
 
-type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
-
-type DeploymentsChains = typeof jsonDeployments;
-type DeploymentsChainIdString = keyof DeploymentsChains;
-type DeploymentsChainIdStrict = DeploymentsChainIdString extends `${infer N extends number}`
-  ? N
-  : never;
-type DeploymentsChainId = DeploymentsChainIdStrict | 1;
-type DeploymentsChain = DeploymentsChains[DeploymentsChainIdStrict];
-type DeploymentContractName = KeysOfUnion<DeploymentsChain>;
-type DeploymentContractKey = keyof DeploymentsChain;
-
-const isDeploymentsChainId = (chainId: Nullable<string | number>): boolean =>
-  Boolean(chainId) && String(chainId) in jsonDeployments;
-
-const isDeploymentChainId = (
-  chainId: DeploymentsChainId,
-  contractName: DeploymentContractName
-): boolean => isDeploymentsChainId(chainId) && contractName in readDeploymentsChain(chainId);
-
-const readDeploymentsChain = (chainId: DeploymentsChainId): DeploymentsChain => {
-  if (!isDeploymentsChainId(chainId)) throw new Error(`No Deployments for chainId ${chainId}!`);
-
-  return jsonDeployments[String(chainId) as DeploymentsChainIdString];
+type DeploymentContract = { address: Address; abi: Abi; name?: string };
+type DeploymentsChain = {
+  [contractName: string]: DeploymentContract;
+};
+type DeploymentsChains = {
+  [chainId: `${number}`]: DeploymentsChain;
 };
 
-type DeploymentType = { address: Address; abi: Abi; name?: string };
+declare const __DEPLOYMENTS_JSON__: DeploymentsChains;
+const deployments = __DEPLOYMENTS_JSON__;
 
-const readDeploymentContractsName = (chainId: DeploymentsChainId): DeploymentContractName[] => {
+const isDeploymentsChainId = (chainId: Nullable<string | number>): boolean =>
+  Boolean(chainId) && String(chainId) in deployments;
+
+const isDeploymentChainId = (chainId: number, contractName: string): boolean =>
+  isDeploymentsChainId(chainId) && contractName in readDeploymentsChain(chainId);
+
+const readDeploymentsChain = (chainId: number): DeploymentsChain => {
+  if (!isDeploymentsChainId(chainId)) throw new Error(`No Deployments for chainId ${chainId}!`);
+
+  return deployments[String(chainId) as keyof DeploymentsChains];
+};
+
+const readDeploymentContractsName = (chainId: number): string[] => {
   const chainDeployment = readDeploymentsChain(chainId);
 
-  return Object.keys(chainDeployment) as DeploymentContractName[];
+  return Object.keys(chainDeployment) as string[];
 };
 
 const readDeploymentByAddress = (
-  chainId: DeploymentsChainId,
+  chainId: number,
   address: string
-): DeploymentType | undefined => {
+): DeploymentContract | undefined => {
   const deployments = readDeploymentsChain(chainId);
 
   const [name, dep] =
-    Object.entries(deployments).find(([, dep]) => (dep as DeploymentType).address === address) ||
-    [];
+    Object.entries(deployments).find(
+      ([, dep]) => (dep as DeploymentContract).address === address
+    ) || [];
   if (!(name && dep)) return;
 
-  const deployment = dep as DeploymentType;
+  const deployment = dep as DeploymentContract;
   deployment.name = name;
   return deployment;
 };
 
 const readDeploymentByName = (
-  chainId: DeploymentsChainId,
-  contractName: DeploymentContractName
-): DeploymentType | undefined => {
+  chainId: number,
+  contractName: string
+): DeploymentContract | undefined => {
   const chainDeployment = readDeploymentsChain(chainId);
 
   if (!(contractName in chainDeployment)) return;
 
-  const deployment = chainDeployment[contractName as DeploymentContractKey] as DeploymentType;
+  const deployment = chainDeployment[contractName] as DeploymentContract;
   deployment.name = contractName;
   return deployment;
 };
 
 const readDeployment = (
-  chainId: DeploymentsChainId,
-  param: DeploymentContractName | Address
-): DeploymentType | undefined => {
+  chainId: number,
+  param: string | Address
+): DeploymentContract | undefined => {
   if (!(chainId && param)) return;
 
   return isAddress(param)
     ? readDeploymentByAddress(chainId, param as Address)
-    : readDeploymentByName(chainId, param as DeploymentContractName);
+    : readDeploymentByName(chainId, param as string);
 };
 
 export {
+  deployments,
   isDeploymentChainId,
   isDeploymentsChainId,
   readDeploymentContractsName,
@@ -85,11 +81,4 @@ export {
   readDeploymentByName,
   readDeployment
 };
-export type {
-  DeploymentsChains,
-  DeploymentsChainId,
-  DeploymentsChain,
-  DeploymentType,
-  DeploymentContractName,
-  DeploymentContractKey
-};
+export type { DeploymentsChains, DeploymentsChain, DeploymentContract };

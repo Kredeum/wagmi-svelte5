@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { replacer } from "@wagmi-svelte5";
-  import { Events } from "@wagmi-svelte5";
-  import type { DeploymentContractName } from "@wagmi-svelte5";
+  import { Events , replacer } from "..";
 
-  const { contractName }: { contractName: DeploymentContractName } = $props();
+  const { contractName }: { contractName: string } = $props();
 
   const events = $derived(new Events(contractName));
 </script>

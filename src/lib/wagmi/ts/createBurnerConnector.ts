@@ -1,12 +1,12 @@
 import { loadBurnerSK } from "./utils2";
-import { BaseError, createConnector as createWagmiConnector } from "@wagmi/core";
 import {
   type EIP1193RequestFn,
   type Hex,
+  type Transport,
+  type SendTransactionParameters,
+  type WalletRpcSchema,
   RpcRequestError,
   SwitchChainError,
-  type Transport,
-  type WalletRpcSchema,
   createWalletClient,
   custom,
   fromHex,
@@ -16,8 +16,9 @@ import {
 import { privateKeyToAccount } from "viem/accounts";
 import { anvil } from "viem/chains";
 import { getHttpRpcClient, hexToBigInt, numberToHex } from "viem/utils";
-import type { SendTransactionParameters } from "viem/zksync";
-import { BURNER_WALLET_ONLY_LOCAL } from "@wagmi-svelte5";
+import { BaseError, createConnector as createWagmiConnector } from "@wagmi/core";
+
+import { BURNER_WALLET_ONLY_LOCAL } from "..";
 
 export class ConnectorNotConnectedError extends BaseError {
   override name = "ConnectorNotConnectedError";

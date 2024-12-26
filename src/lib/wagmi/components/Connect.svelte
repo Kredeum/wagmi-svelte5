@@ -8,9 +8,13 @@
     type GetConnectorsReturnType
   } from "@wagmi/core";
 
-  import { Network, wagmiConfig } from "@wagmi-svelte5";
-  import { BURNER_WALLET_ONLY_LOCAL } from "@wagmi-svelte5";
-  import { isDeploymentsChainId, type Nullable } from "@wagmi-svelte5";
+  import {
+    type Nullable,
+    Network,
+    wagmiConfig,
+    BURNER_WALLET_ONLY_LOCAL,
+    isDeploymentsChainId
+  } from "..";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
