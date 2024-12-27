@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { deployments, readDeploymentByName, wagmi } from "@wagmi-svelte5";
+  import { deployments, readDeploymentByName, wagmi } from "$lib/wagmi";
 
   console.log("DEPLOYMENTS", deployments);
 </script>

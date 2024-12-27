@@ -19,7 +19,7 @@ const getChains = () => {
       chainName in allChains && selectedChains.push(allChains[chainName as keyof typeof allChains])
   );
   selectedChains.push(mainnet);
-  console.log("selectedChains:", selectedChains);
+  // console.log("selectedChains:", selectedChains);
   return selectedChains;
 };
 
@@ -67,7 +67,7 @@ class Wagmi extends Network {
   watch = () =>
     watchChainId(wagmiConfig, {
       onChange: (chainId: number) => {
-        console.log("watchChainId Change:", chainId);
+        console.info("watchChainId Change:", chainId);
         this.#chainId = chainId;
       }
     });

@@ -6,5 +6,6 @@ export default defineConfig({
     port: 4173
   },
 
-  testDir: "tests/e2e"
+  testDir: "tests/e2e",
+  testMatch: "*.t.ts"
 });

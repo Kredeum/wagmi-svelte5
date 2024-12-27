@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { Account, Connect, wagmi, newWagmi } from "@wagmi-svelte5";
+  import { Account, Connect, Disconnect, wagmi, newWagmi } from "$lib/wagmi";
   import "../app.pcss";
 
   let { children }: { children: Snippet } = $props();
@@ -11,11 +11,7 @@
   console.log("chains:", chains);
   const account = new Account();
 
-  const disconnect = () => {
-    console.log("disconnect");
-  };
   const switchChain = (chainId: number) => {
-    console.log("switch", chainId);
     wagmi.switch(chainId);
   };
 </script>
@@ -30,7 +26,7 @@
       {#if account.address}
         {account.address} ({account.chainId})
 
-        <button class="btn btn-primary btn-sm" onclick={() => disconnect()}>Disconnect</button>
+        <Disconnect />
 
         {#each chains as chain (chain.id)}
           {#if chain.id !== account.chainId}

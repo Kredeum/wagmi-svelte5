@@ -64,7 +64,7 @@
     modalDisplay = false;
     if (!wagmiConfig) return;
 
-    console.log("connectWallet", connector.type);
+    console.info("connectWallet", connector.type);
     if (isActiveConnection(connector.type)) return;
 
     const parameters: { connector: ConnectorType; chainId?: number } = { connector };
@@ -85,7 +85,7 @@
         : network.chainIdDefault;
 
     if (chainId && chainId !== wallet.chainId) {
-      console.log("<Connect connectWallet ~ switch from", wallet.chainId, "to", chainId);
+      // console.log("<Connect connectWallet ~ switch from", wallet.chainId, "to", chainId);
 
       network.switch(chainId);
     }
@@ -101,7 +101,10 @@
 </button>
 
 {#if modalDisplay}
-  <div class="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-60">
+  <div
+    id="connect-wallet-modal"
+    class="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-60"
+  >
     <div class="relative mt-20 flex flex-col items-center rounded-3xl bg-secondary px-8 pb-8 pt-4">
       <h3 class="mb-6 text-xl font-bold">Connect Wallet</h3>
       <button
@@ -117,7 +120,7 @@
         {/if}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
-        {#if !BURNER_WALLET_ONLY_LOCAL || network.chainId === Network.chainIdLocal}
+        {#if network.chainId === Network.chainIdLocal || !BURNER_WALLET_ONLY_LOCAL}
           {@render connectSnippet("burnerWallet")}
         {/if}
       </ul>

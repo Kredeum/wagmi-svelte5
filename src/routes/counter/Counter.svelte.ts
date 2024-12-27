@@ -1,5 +1,5 @@
 import type { Address } from "viem";
-import { SmartContract, isAddress } from "@wagmi-svelte5";
+import { SmartContract, isAddress } from "$lib/wagmi";
 
 class Counter extends SmartContract {
   get number() {

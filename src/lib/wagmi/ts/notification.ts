@@ -1,4 +1,5 @@
 import toast, { type Renderable, type ToastPosition } from "svelte-hot-french-toast";
+
 import { BaseNotification } from "..";
 
 type NotificationProps = {

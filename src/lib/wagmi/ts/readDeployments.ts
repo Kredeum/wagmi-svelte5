@@ -1,5 +1,5 @@
 import { type Abi, type Address } from "viem";
-import { isAddress, type Nullable } from "@wagmi-svelte5";
+import { isAddress, type Nullable } from "..";
 
 type DeploymentContract = { address: Address; abi: Abi; name?: string };
 type DeploymentsChain = {

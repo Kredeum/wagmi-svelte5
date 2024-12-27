@@ -1,8 +1,6 @@
 import { getAccount, watchAccount } from "@wagmi/core";
 import { Address, wagmiConfig } from "..";
-import type { Nullable } from "..";
-
-type AccountType = ReturnType<typeof getAccount>;
+import type { Nullable, AccountType } from "..";
 
 // Account => account & chain & chainId & isConnected & connectorId
 // Address => address & balance & symbol & decimals & ensName & ensAvatar
@@ -25,7 +23,7 @@ class Account extends Address {
   watch = () =>
     watchAccount(wagmiConfig, {
       onChange: (newAccount: AccountType) => {
-        console.log("watchAccount Change:", newAccount);
+        console.info("watchAccount Change:", newAccount);
         this.#account = newAccount;
         super.address = newAccount.address;
       }

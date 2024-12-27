@@ -1,4 +1,4 @@
-import { loadBurnerSK } from "./utils2";
+import { loadBurnerSK } from "./utils";
 import {
   type EIP1193RequestFn,
   type Hex,
@@ -161,7 +161,7 @@ export const createBurnerConnector = () => {
     },
 
     async switchChain({ chainId }) {
-      console.log("createBurnerConnector switchChain", chainId);
+      // console.log("createBurnerConnector switchChain", chainId);
       const provider = await this.getProvider();
       const chain = config.chains.find((x) => x.id === chainId);
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());

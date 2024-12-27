@@ -1,5 +1,6 @@
 export { default as BaseNotification } from "./components/BaseNotification.svelte";
 export { default as Connect } from "./components/Connect.svelte";
+export { default as Disconnect } from "./components/Disconnect.svelte";
 export { default as Logs } from "./components/Logs.svelte";
 export { default as Link } from "./components/Link.svelte";
 export { default as LinkAddress } from "./components/LinkAddress.svelte";
@@ -14,7 +15,6 @@ export * from "./ts/getContractEvents";
 export * from "./ts/notification";
 export * from "./ts/readDeployments";
 export * from "./ts/utils";
-export * from "./ts/utils2";
 export * from "./classes/SmartContract.svelte";
 export * from "./classes/Address.svelte";
 export * from "./classes/Account.svelte";

@@ -1,10 +1,6 @@
-import { type Address as AddressType, type ContractEventName, type Log } from "viem";
+import { type Address as AddressType, type ContractEventName } from "viem";
 import { watchContractEvent, getBlockNumber } from "@wagmi/core";
-
-import { type LogWithArgs, SmartContract, wagmi, wagmiConfig, getContractEvents } from "..";
-
-type EventsFilter = { eventName?: ContractEventName; args?: Record<string, unknown> };
-type EventsSortOrder = "DESC" | "ASC" | undefined;
+import { type LogWithArgs, type EventsFilter, type EventsSortOrder, SmartContract, wagmi, wagmiConfig, getContractEvents } from "..";
 
 class Events extends SmartContract {
   limit: number = $state(0);
@@ -73,7 +69,7 @@ class Events extends SmartContract {
           return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
         }
       );
-      console.log("EVENTS  fetch", this.listAll.length, params, $state.snapshot(this.listAll));
+      // console.log("EVENTS  fetch", this.listAll.length, params, $state.snapshot(this.listAll));
     } catch (error) {
       console.error("EVENTS Failed to fetch logs:", error);
     }
@@ -106,7 +102,7 @@ class Events extends SmartContract {
 
     $effect(() => {
       wagmi.chainId;
-      console.log("EVENTS $effect ~ chainId :", wagmi.chainId);
+      // console.log("EVENTS $effect ~ chainId :", wagmi.chainId);
       this.fetch(watch);
     });
 
@@ -115,4 +111,3 @@ class Events extends SmartContract {
 }
 
 export { Events };
-export type { EventsFilter, EventsSortOrder };

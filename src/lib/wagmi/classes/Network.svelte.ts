@@ -23,7 +23,6 @@ class Network {
   #chainId: number = $state(31337);
   chainIdDefault: number = Network.chainIdLocal;
   get chainId() {
-    console.log("Network $effect getchainId ~ chainId:", this.#chainId);
     return this.#chainId;
   }
   get chain() {
@@ -78,7 +77,7 @@ class Network {
 
     if (chainId !== wagmi.chainId) await switchChain(wagmiConfig, { chainId });
 
-    console.log("<Network switch", chainId, "=>", wagmi.chainId);
+    console.info("<Network switch", chainId, "=>", wagmi.chainId);
     this.getBlockNumber();
   };
 
@@ -97,7 +96,7 @@ class Network {
 
       untrack(() => {
         if (account.chainId == this.chainId) return;
-        console.log("Network $effect switch:");
+        // console.log("Network $effect switch:");
         this.switch(account.chainId);
       });
     });

@@ -1,6 +1,6 @@
 {
   "name": "@kredeum/wagmi-svelte5",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Svelte5 Web3 library based on Wagmi",
   "keywords": [
     "svelte",
@@ -33,10 +33,10 @@
     "format": "prettier --write --list-different .",
     "check": "prettier --check . && eslint . && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "build": "vite build",
-    "test": "npm run test:unit -- --run && npm run test:e2e",
+    "test": "npm run test:unit && npm run test:e2e",
     "dev": "vite dev",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "package": "NODE_ENV=prod svelte-kit sync && svelte-package && publint"
   },
@@ -53,6 +53,7 @@
     "@sveltejs/kit": "^2.15.0",
     "@sveltejs/package": "^2.3.7",
     "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "@types/node": "^22.10.2",
     "@wagmi/connectors": "^5.7.3",
     "@wagmi/core": "^2.16.3",
     "@walletconnect/ethereum-provider": "^2.17.3",
@@ -63,6 +64,7 @@
     "eslint-plugin-svelte": "^2.46.1",
     "esm-env": "^1.2.1",
     "globals": "^15.14.0",
+    "happy-dom": "^16.0.1",
     "prettier": "^3.4.2",
     "prettier-plugin-svelte": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
