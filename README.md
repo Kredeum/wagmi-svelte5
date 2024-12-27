@@ -1,38 +1,78 @@
-# sv
+# @kredeum/wagmi-svelte5
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A Svelte 5 Web3 library based on Wagmi, providing seamless integration of Web3 functionality into your Svelte applications.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- 🔌 Built for Svelte 5
+- 🌐 Web3 Integration
+- 🔒 Wallet Connection Management
+- ⛓️ Multi-chain Support
+- 🎣 Reactive Web3 Hooks
+- 🔄 Auto-refresh on Network Changes
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Installation
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm install @kredeum/wagmi-svelte5
+# or
+pnpm add @kredeum/wagmi-svelte5
+# or
+yarn add @kredeum/wagmi-svelte5
 ```
 
-## Building
+## Quick Start
 
-To create a production version of your app:
+```typescript
+import { createConfig } from '@kredeum/wagmi-svelte5';
+
+// Configure your Web3 settings
+const config = createConfig({
+  // Your configuration options here
+});
+```
+
+## Usage
+
+### Connect Wallet
+
+```svelte
+<script>
+  import { connect } from '@kredeum/wagmi-svelte5';
+</script>
+
+<button on:click={connect}>Connect Wallet</button>
+```
+
+## Requirements
+
+- Svelte 5.x
+- Node.js 16+
+
+## Development
 
 ```bash
-npm run build
+# Install dependencies
+pnpm install
+
+# Run development server
+pnpm dev
+
+# Build package
+pnpm build
+
+# Run tests
+pnpm test
 ```
 
-You can preview the production build with `npm run preview`.
+## Contributing
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+zapaz.eth <zapaz@kredeum.com> (http://labs.kredeum.com/)
