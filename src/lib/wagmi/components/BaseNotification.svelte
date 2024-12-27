@@ -8,7 +8,7 @@
     XMark
   } from "svelte-hero-icons";
   import toast_, { type Renderable, type Toast } from "svelte-hot-french-toast";
-  
+
   import { clickOutside } from "..";
 
   const {
@@ -26,6 +26,7 @@
 
 <div
   use:clickOutside={() => toast_.dismiss(id)}
+  role="status"
   class="notification-{status} relative flex max-w-sm transform-gpu flex-row items-start justify-between space-x-2 rounded-xl bg-base-200 p-4 shadow-center shadow-accent transition-all duration-500 ease-in-out {position!.substring(
     0,
     3

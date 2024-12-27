@@ -24,7 +24,7 @@ yarn add @kredeum/wagmi-svelte5
 ## Quick Start
 
 ```typescript
-import { createConfig } from '@kredeum/wagmi-svelte5';
+import { createConfig } from "@kredeum/wagmi-svelte5";
 
 // Configure your Web3 settings
 const config = createConfig({
@@ -38,7 +38,7 @@ const config = createConfig({
 
 ```svelte
 <script>
-  import { connect } from '@kredeum/wagmi-svelte5';
+  import { connect } from "@kredeum/wagmi-svelte5";
 </script>
 
 <button on:click={connect}>Connect Wallet</button>

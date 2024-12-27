@@ -11,7 +11,15 @@ import {
   writeContract
 } from "@wagmi/core";
 
-import { wagmi, wagmiConfig, isAddress, shorten0xString, readDeployment, notification, LinkTx } from "..";
+import {
+  wagmi,
+  wagmiConfig,
+  isAddress,
+  shorten0xString,
+  readDeployment,
+  notification,
+  LinkTx
+} from "..";
 
 let counter = 0;
 

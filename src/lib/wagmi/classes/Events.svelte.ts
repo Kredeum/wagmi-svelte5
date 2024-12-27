@@ -1,6 +1,14 @@
-import { type Address as AddressType, type ContractEventName } from "viem";
+import { type Address as AddressType, type Log } from "viem";
 import { watchContractEvent, getBlockNumber } from "@wagmi/core";
-import { type LogWithArgs, type EventsFilter, type EventsSortOrder, SmartContract, wagmi, wagmiConfig, getContractEvents } from "..";
+import {
+  type LogWithArgs,
+  type EventsFilter,
+  type EventsSortOrder,
+  SmartContract,
+  wagmi,
+  wagmiConfig,
+  getContractEvents
+} from "..";
 
 class Events extends SmartContract {
   limit: number = $state(0);

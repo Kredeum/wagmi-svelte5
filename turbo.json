@@ -1,0 +1,43 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "envMode": "strict",
+  "ui": "stream",
+  "tasks": {
+    "format": {
+      "inputs": ["src/**", "test/**"],
+      "outputLogs": "new-only"
+    },
+    "check": {
+      "dependsOn": ["format"],
+      "outputLogs": "new-only"
+    },
+    "build": {
+      "dependsOn": ["check"],
+      "outputLogs": "new-only"
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "outputLogs": "new-only"
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "inputs": ["src/**"],
+      "outputLogs": "new-only"
+    },
+    "start": {
+      "dependsOn": ["check"],
+      "cache": false,
+      "persistent": true,
+      "inputs": ["src/**"],
+      "outputLogs": "new-only"
+    },
+    "preview": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "outputLogs": "new-only"
+    }
+  }
+}

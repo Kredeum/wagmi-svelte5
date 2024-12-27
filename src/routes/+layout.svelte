@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { Account, Connect, Disconnect, wagmi, newWagmi } from "$lib/wagmi";
+  import { Toaster } from "svelte-hot-french-toast";
   import "../app.pcss";
 
   let { children }: { children: Snippet } = $props();
@@ -8,13 +9,14 @@
   newWagmi();
 
   const chains = wagmi.chains;
-  console.log("chains:", chains);
   const account = new Account();
 
   const switchChain = (chainId: number) => {
     wagmi.switch(chainId);
   };
 </script>
+
+<Toaster />
 
 <div class="flex min-h-screen flex-col">
   <div class="p-8">

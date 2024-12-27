@@ -1,6 +1,7 @@
 test-results
 node_modules
 dist
+.turbo
 
 # Output
 .output

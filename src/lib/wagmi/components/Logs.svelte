@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Events , replacer } from "..";
+  import { Events, replacer } from "..";
 
   const { contractName }: { contractName: string } = $props();
 
