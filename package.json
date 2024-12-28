@@ -1,6 +1,7 @@
 {
   "name": "@kredeum/wagmi-svelte5",
-  "version": "0.1.5",
+  "version": "0.1.6",
+  "type": "module",
   "description": "Svelte5 Web3 library based on Wagmi",
   "keywords": [
     "svelte",
@@ -25,20 +26,29 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "type": "module",
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": "^22",
+    "pnpm": "^9"
+  },
   "scripts": {
     "all": "pnpm run setup && pnpm run format && pnpm run check && pnpm run build && pnpm run test && pnpm run dev",
     "clean": "rm -rf node_modules .pnpm-lock.yaml .svelte-kit dist",
     "setup": "pnpm run clean && pnpm install",
     "format": "prettier --write --list-different .",
-    "check": "prettier --check . && eslint . && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check": "prettier --check . && eslint . && pnpm run sync && svelte-check --tsconfig ./tsconfig.json",
     "build": "vite build",
-    "test": "npm run test:unit && npm run test:e2e",
+    "test": "pnpm run test:unit && pnpm run test:e2e",
     "dev": "vite dev",
+    "start": "vite dev",
     "preview": "vite preview",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
-    "package": "NODE_ENV=prod svelte-kit sync && svelte-package && publint"
+    "package": "pnpm run sync && svelte-package && publint",
+    "sync": "NODE_ENV=prod svelte-kit sync",
+    "prepublishOnly": "pnpm package",
+    "check:watch": "pnpm run sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "prettier --check . && eslint ."
   },
   "dependencies": {
     "svelte": "^5.16.0"
@@ -50,7 +60,7 @@
     "@playwright/test": "^1.49.1",
     "@sveltejs/adapter-auto": "^3.3.1",
     "@sveltejs/adapter-static": "^3.0.8",
-    "@sveltejs/kit": "^2.15.0",
+    "@sveltejs/kit": "^2.15.1",
     "@sveltejs/package": "^2.3.7",
     "@sveltejs/vite-plugin-svelte": "^4.0.4",
     "@types/node": "^22.10.2",
@@ -58,7 +68,7 @@
     "@wagmi/core": "^2.16.3",
     "@walletconnect/ethereum-provider": "^2.17.3",
     "autoprefixer": "^10.4.20",
-    "daisyui": "^4.12.22",
+    "daisyui": "^4.12.23",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.46.1",
@@ -73,6 +83,7 @@
     "svelte-hero-icons": "^5.2.0",
     "svelte-hot-french-toast": "^1.0.0",
     "tailwindcss": "^3.4.17",
+    "turbo": "^2.3.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2",
     "viem": "^2.21.57",

@@ -10,7 +10,15 @@ import {
 } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 
-import { Network, createBurnerConnector, alchemyTransport, ALCHEMY_API_KEY, POLLING_INTERVAL, CHAINS, WALLET_CONNECT_PROJECT_ID } from "..";
+import {
+  Network,
+  createBurnerConnector,
+  alchemyTransport,
+  ALCHEMY_API_KEY,
+  POLLING_INTERVAL,
+  CHAINS,
+  WALLET_CONNECT_PROJECT_ID
+} from "..";
 
 const getChains = () => {
   const selectedChains: Chain[] = [];

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Logs ,readDeploymentContractsName ,wagmi } from "..";
+  import { Logs, readDeploymentContractsName, wagmi } from "..";
 
   const localStorageContractKey = "wagmiSvelte5.contractSelected";
 

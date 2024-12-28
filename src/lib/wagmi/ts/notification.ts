@@ -53,7 +53,7 @@ export const notification = {
   loading: (Content: Renderable, options?: NotificationOptions) => {
     return Notification({ Content, status: "loading", ...options });
   },
-  remove: (toastId: string) => {
+  remove: (toastId?: string) => {
     toast.remove(toastId);
   }
 };

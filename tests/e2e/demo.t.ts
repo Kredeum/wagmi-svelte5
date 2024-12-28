@@ -40,9 +40,9 @@ test("connect button should be visible and clickable", async ({ page }) => {
   await expect(disconnectButton).toBeVisible();
 });
 
-test('disconnect wallet functionality', async ({ page }) => {
+test("disconnect wallet functionality", async ({ page }) => {
   // Navigate to the home page
-  await page.goto('/');
+  await page.goto("/");
 
   // Find and click the connect button
   const connectButton = page.locator("#connect-wallet");

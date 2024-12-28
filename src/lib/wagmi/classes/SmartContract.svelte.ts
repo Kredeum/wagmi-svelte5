@@ -11,7 +11,15 @@ import {
   writeContract
 } from "@wagmi/core";
 
-import { wagmi, wagmiConfig, isAddress, shorten0xString, readDeployment, notification, LinkTx } from "..";
+import {
+  wagmi,
+  wagmiConfig,
+  isAddress,
+  shorten0xString,
+  readDeployment,
+  notification,
+  LinkTx
+} from "..";
 
 let counter = 0;
 
@@ -57,8 +65,7 @@ class SmartContract {
     functionName: string = "",
     args: unknown[] = []
   ) => {
-    // console.log("SMARTCONTRACT READ", functionName, args, chainId, deployment.address, `#${this.id}`);
-    // console.log("SMARTCONTRACT READ",  deployment.abi);
+    // console.log("SMARTCONTRACT READ", functionName, args, chainId, `#${this.id}`);
     const abiFunction = (abi as unknown as AbiFunction[]).find(
       (f) => f.type === "function" && f.name === functionName && f.inputs.length === args.length
     );

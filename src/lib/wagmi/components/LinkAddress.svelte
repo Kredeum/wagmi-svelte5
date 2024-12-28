@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link , Network, wagmi } from "..";
+  import { Link, Network, wagmi } from "..";
 
   const { address, description = "address" }: { address?: `0x${string}`; description?: string } =
     $props();

@@ -14,18 +14,11 @@ type LogsParamsType = {
 
 type AccountType = ReturnType<typeof getAccount>;
 
-type EventsFilter = { 
-  eventName?: ContractEventName; 
-  args?: Record<string, unknown> 
+type EventsFilter = {
+  eventName?: ContractEventName;
+  args?: Record<string, unknown>;
 };
 
 type EventsSortOrder = "DESC" | "ASC" | undefined;
 
-export type { 
-  Nullable, 
-  LogWithArgs, 
-  LogsParamsType,
-  AccountType,
-  EventsFilter,
-  EventsSortOrder 
-};
+export type { Nullable, LogWithArgs, LogsParamsType, AccountType, EventsFilter, EventsSortOrder };
