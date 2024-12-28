@@ -1,40 +1,65 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalPassThroughEnv": [
+    "PUBLIC_CHAINS",
+    "PUBLIC_POLLING_INTERVAL",
+    "PUBLIC_ALCHEMY_API_KEY",
+    "PUBLIC_WALLET_CONNECT_PROJECT_ID",
+    "PUBLIC_BURNER_WALLET_ONLY_LOCAL",
+    "PUBLIC_BURNER_WALLET_KEY"
+  ],
   "envMode": "strict",
   "ui": "stream",
   "tasks": {
     "format": {
-      "inputs": ["src/**", "test/**"],
+      "inputs": [
+        "src/**",
+        "test/**"
+      ],
       "outputLogs": "new-only"
     },
     "check": {
-      "dependsOn": ["format"],
+      "dependsOn": [
+        "format"
+      ],
       "outputLogs": "new-only"
     },
     "build": {
-      "dependsOn": ["check"],
+      "dependsOn": [
+        "check"
+      ],
       "outputLogs": "new-only"
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "cache": false,
       "outputLogs": "new-only"
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "inputs": ["src/**"],
+      "inputs": [
+        "src/**"
+      ],
       "outputLogs": "new-only"
     },
     "start": {
-      "dependsOn": ["check"],
+      "dependsOn": [
+        "check"
+      ],
       "cache": false,
       "persistent": true,
-      "inputs": ["src/**"],
+      "inputs": [
+        "src/**"
+      ],
       "outputLogs": "new-only"
     },
     "preview": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "cache": false,
       "persistent": true,
       "outputLogs": "new-only"

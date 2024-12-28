@@ -1,6 +1,6 @@
 {
   "name": "@kredeum/wagmi-svelte5",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "type": "module",
   "description": "Svelte5 Web3 library based on Wagmi",
   "keywords": [
@@ -40,6 +40,7 @@
     "build": "vite build",
     "test": "pnpm run test:unit && pnpm run test:e2e",
     "dev": "vite dev",
+    "start": "vite dev",
     "preview": "vite preview",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",

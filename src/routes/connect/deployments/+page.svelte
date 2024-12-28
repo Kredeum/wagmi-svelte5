@@ -4,12 +4,12 @@
   console.log("DEPLOYMENTS", deployments);
 </script>
 
-<div class="p-4">
-  Deployment <strong>Counter</strong>, address on chain #{wagmi.chainId} =
-  {readDeploymentByName(wagmi.chainId, "Counter")?.address}
-</div>
+<div>
+  <div class="py-4">
+    Deployment <strong>Counter</strong>, address on chain #{wagmi.chainId} =
+    {readDeploymentByName(wagmi.chainId, "Counter")?.address}
+  </div>
 
-<div class="p-4">
   <details>
     <summary>All Deployments</summary>
     <pre>

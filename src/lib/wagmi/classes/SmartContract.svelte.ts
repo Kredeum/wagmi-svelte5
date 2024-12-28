@@ -65,8 +65,7 @@ class SmartContract {
     functionName: string = "",
     args: unknown[] = []
   ) => {
-    // console.log("SMARTCONTRACT READ", functionName, args, chainId, deployment.address, `#${this.id}`);
-    // console.log("SMARTCONTRACT READ",  deployment.abi);
+    // console.log("SMARTCONTRACT READ", functionName, args, chainId, `#${this.id}`);
     const abiFunction = (abi as unknown as AbiFunction[]).find(
       (f) => f.type === "function" && f.name === functionName && f.inputs.length === args.length
     );
