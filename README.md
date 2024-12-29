@@ -40,7 +40,7 @@ yarn add @kredeum/wagmi-svelte5
 
 ```svelte
 <script lang="ts">
-  import { newWagmi } from "@wagmi-svelte5";
+  import { newWagmi } from "@kredeum/wagmi-svelte5";
   import { Counter } from "$lib/examples/Counter.svelte";
 
   newWagmi();
@@ -72,7 +72,7 @@ export class Counter extends SmartContract {
 
 ```svelte
 <script lang="ts">
-  import { newWagmi, SmartContract } from "@wagmi-svelte5";
+  import { newWagmi, SmartContract } from "@kredeum/wagmi-svelte5";
 
   newWagmi();
   const contract = new SmartContract("Counter");

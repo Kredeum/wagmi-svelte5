@@ -1,6 +1,6 @@
 {
   "name": "@kredeum/wagmi-svelte5",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "description": "Svelte5 Web3 library based on Wagmi",
   "keywords": [
@@ -10,7 +10,7 @@
     "web3",
     "typescript"
   ],
-  "homepage": "https://github.com/zapaz/wagmi-svelte5",
+  "homepage": "https://github.com/kredeum/wagmi-svelte5",
   "license": "MIT",
   "author": "zapaz.eth <zapaz@kredeum.com> (http://labs.kredeum.com/)",
   "files": [
