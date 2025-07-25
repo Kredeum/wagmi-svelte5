@@ -1,6 +1,7 @@
 import { getAccount, watchAccount } from "@wagmi/core";
-import { Address, wagmiConfig } from "..";
+import { wagmiConfig } from "..";
 import type { Nullable, AccountType } from "..";
+import { Address } from "./Address.svelte";
 
 // Account => account & chain & chainId & isConnected & connectorId
 // Address => address & balance & symbol & decimals & ensName & ensAvatar
@@ -28,9 +29,9 @@ class Account extends Address {
       }
     });
 
-  constructor({ ens = false, watchBalance = false } = {}) {
+  constructor({ ens = false } = {}) {
     const account = getAccount(wagmiConfig);
-    super(account.address, { ens, watchBalance });
+    super(account.address, { ens });
 
     this.#account = account;
 

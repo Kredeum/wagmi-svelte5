@@ -1,12 +1,24 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import "../app.pcss";
+  import { Account, Connect, Disconnect, newWagmi } from "$lib/wagmi";
 
-{#snippet pageTest(pagePath: string, pageDescription: string)}
-  <li><a class="text-blue-500 hover:underline" href={pagePath}>{pageDescription}</a></li>
-{/snippet}
+  newWagmi();
 
-<ul class="list-disc space-y-2 pl-5">
-  {@render pageTest("/quick/counter", "Read Counter")}
-  {@render pageTest("/connect/counter", "Read/Write Counter")}
-  {@render pageTest("/quick/notification", "Notifications")}
-  {@render pageTest("/connect/deployments", "Deployments")}
-</ul>
+  const account = new Account();
+</script>
+
+<main class="main">
+  {#if account.address}
+    {account.address} ({account.chainId})
+
+    <Disconnect />
+  {:else}
+    <Connect chainId={account.chainId} bind:address={account.address} />
+  {/if}
+</main>
+
+<style lang="pcss">
+  .main {
+    padding: 2rem;
+  }
+</style>

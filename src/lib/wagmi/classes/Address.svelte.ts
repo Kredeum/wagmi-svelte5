@@ -10,33 +10,23 @@ import {
   getEnsAvatar,
   getEnsName
 } from "@wagmi/core";
-import { type Nullable, isAddress, isEns, wagmi, wagmiConfig, Watcher } from "..";
+import { type Nullable, isAddress, isEns, wagmi, wagmiConfig } from "..";
 
 class Address {
-  watcher: Nullable<Watcher>;
   #address = $state<Nullable<AddressType>>();
   #balance = $state<Nullable<GetBalanceReturnType>>();
   #ensName = $state<string | undefined>();
   #ensAvatar = $state<string | undefined>();
 
-  #watchBalance = false;
   #ens = false;
 
   #reset = () => {
-    this.watcher?.stop();
     this.#address = null;
     this.#balance = null;
     this.#ensName = undefined;
     this.#ensAvatar = undefined;
   };
 
-  #getAndWatchBalance = () => {
-    this.getBalance();
-    if (this.#watchBalance) {
-      this.watcher ??= new Watcher();
-      this.watcher.restart(this.getBalance);
-    }
-  };
   getBalance = async () => {
     if (!(this.address && isAddress(this.address))) return;
 
@@ -113,13 +103,9 @@ class Address {
     return this.#balance?.symbol;
   }
 
-  constructor(
-    addressOrName: Nullable<AddressType | string>,
-    { watchBalance = false, ens = false } = {}
-  ) {
+  constructor(addressOrName: Nullable<AddressType | string>, { ens = false } = {}) {
     // console.log("<Address constructor", addressOrName);
 
-    this.#watchBalance = watchBalance;
     this.#ens = ens;
 
     this.setAddressOrName(addressOrName);
@@ -129,7 +115,7 @@ class Address {
       if (!this.address) return;
       wagmi.chainId;
 
-      untrack(() => this.#getAndWatchBalance());
+      untrack(() => this.getBalance());
     });
 
     // $inspect("<Address", this.address, this.ensName);

@@ -10,15 +10,9 @@ import {
 } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 
-import {
-  Network,
-  createBurnerConnector,
-  alchemyTransport,
-  ALCHEMY_API_KEY,
-  POLLING_INTERVAL,
-  CHAINS,
-  WALLET_CONNECT_PROJECT_ID
-} from "..";
+import { alchemyTransport, ALCHEMY_API_KEY, CHAINS, WALLET_CONNECT_PROJECT_ID } from "..";
+
+import { Network } from "./Network.svelte";
 
 const getChains = () => {
   const selectedChains: Chain[] = [];
@@ -43,8 +37,7 @@ const connectors = [
   coinbaseWallet({
     appName: "Wagmi-Svelte-5",
     preference: "all"
-  }),
-  createBurnerConnector()
+  })
 ];
 
 const wagmiConfig = createConfig({
@@ -58,7 +51,6 @@ const wagmiConfig = createConfig({
     });
     // console.log("WAGMI client created:", chain.id, client);
 
-    if (chain.id === Network.chainIdLocal) client.pollingInterval = POLLING_INTERVAL;
     return client;
   }
 });
