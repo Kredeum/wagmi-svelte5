@@ -32,6 +32,12 @@ export default ts.config(
     }
   },
   {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parser: ts.parser
+    }
+  },
+  {
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": "warn",

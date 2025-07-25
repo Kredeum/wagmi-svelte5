@@ -84,7 +84,7 @@ class Wagmi extends Network {
     this.reconnect();
     this.watch();
 
-    $inspect("WAGMI", this.#chainId);
+    // $inspect("WAGMI", this.#chainId);
   }
 }
 

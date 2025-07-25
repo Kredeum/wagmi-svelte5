@@ -100,7 +100,7 @@
   <div id="connect-wallet-modal" class="modal-overlay">
     <div class="modal-content">
       <h3 class="modal-title">Connect Wallet</h3>
-      <button class="close-btn" onclick={() => (modalDisplay = false)}>
+      <button class="close-btn" aria-label="Close modal" onclick={() => (modalDisplay = false)}>
         <svg class="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
@@ -129,7 +129,7 @@
       <img src="/{slug}.svg" alt={name} class="wallet-icon" />
       <button
         id="connect-{slug.toLowerCase()}"
-        class="btn-default btn btn-sm wallet-button w-40"
+        class="wallet-button"
         onclick={() => connectWallet(connector)}
       >
         {name}
@@ -188,43 +188,50 @@
   .modal-content {
     background-color: white;
     position: relative;
-    margin-top: 5rem;
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 1.5rem;
-    padding: 1rem 2rem 2rem 2rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border: 1px solid #374151;
+    border-radius: 1.25rem;
+    padding: 1rem 1rem 1rem 1rem;
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e5e7eb;
+    max-width: 250px;
+    width: 90vw;
   }
 
   .modal-title {
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: black;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #111827;
+    text-align: center;
+    padding: 0.5rem 1rem ;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .close-btn {
     position: absolute;
-    right: 0.75rem;
-    top: 0.75rem;
-    width: 2rem;
-    height: 2rem;
+    right: 0rem;
+    top: 0rem;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     background: none;
     border: none;
-    color: black;
+    color: #6b7280;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
   .close-btn:hover {
-    background-color: #374151;
-    color: white;
+    background-color: #f3f4f6;
+    color: #374151;
   }
 
   .close-icon {
@@ -235,29 +242,50 @@
   .wallet-list {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    text-align: center;
+    gap: 1rem;
+    width: 100%;
   }
 
   .wallet-item {
     display: flex;
     align-items: center;
+    gap: 1rem;
+    width: 220px;
   }
 
   .wallet-button {
-    background-color: lightgrey;
-    border-radius: 0.5rem;
-    padding: 0.2rem 0.2rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border: none;
+    background-color: #f8fafc;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    flex: 1;
+    text-align: left;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .wallet-button:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .wallet-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 
   .wallet-icon {
-    margin-right: 0.5rem;
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
   }
 </style>

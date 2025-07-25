@@ -1,5 +1,4 @@
 <script lang="ts">
-  import "../app.pcss";
   import { Account, Connect, Disconnect, newWagmi } from "$lib/wagmi";
 
   newWagmi();
